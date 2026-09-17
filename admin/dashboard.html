@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Glow At Home Dashboard
+</title>
+
+<link rel="stylesheet"
+href="../css/admin.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+<h2>
+
+Glow At Home
+
+</h2>
+
+<nav>
+
+<a class="active">
+
+<i class="fa-solid fa-house"></i>
+
+Dashboard
+
+</a>
+
+<a id="new-post-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+New Post
+
+</a>
+
+<a>
+
+<i class="fa-solid fa-file"></i>
+
+Posts
+
+</a>
+
+<a>
+
+<i class="fa-solid fa-gear"></i>
+
+Settings
+
+</a>
+
+<a id="logout-btn">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+Logout
+
+</a>
+
+</nav>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="content">
+
+<header>
+
+<h1>
+
+Dashboard
+
+</h1>
+
+<p>
+
+Welcome back.
+
+</p>
+
+</header>
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h3 id="total-posts">
+
+0
+
+</h3>
+
+<p>
+
+Posts
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3 id="featured-posts">
+
+0
+
+</h3>
+
+<p>
+
+Featured
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>
+
+5
+
+</h3>
+
+<p>
+
+Categories
+
+</p>
+
+</div>
+
+</div>
+
+<section class="recent">
+
+<div class="recent-header">
+
+<h2>
+
+Recent Posts
+
+</h2>
+
+<button id="create-post">
+
++ New Post
+
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Thumbnail</th>
+
+<th>Title</th>
+
+<th>Category</th>
+
+<th>Date</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="posts-table">
+
+<!-- Firebase -->
+
+</tbody>
+
+</table>
+
+</section>
+
+</main>
+
+</div>
+
+<script type="module" src="../js/admin.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow At Home | Post Editor</title>
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+<h2>Glow At Home</h2>
+<nav>
+<a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+<a href="editor.html" class="active"><i class="fa-solid fa-plus"></i> New Post</a>
+<a id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+</nav>
+</aside>
+
+<main class="content">
+<header>
+<h1 id="editor-title">New Post</h1>
+<p>Write and publish your article.</p>
+</header>
+
+<form id="post-form" class="editor-form">
+
+<input type="hidden" id="post-id">
+
+<label>Title</label>
+<input type="text" id="post-title" placeholder="Post title" required>
+
+<label>Category</label>
+<select id="post-category" required>
+<option value="">Select category</option>
+<option value="Self-Care">Self-Care</option>
+<option value="Beauty">Beauty</option>
+<option value="Home Decor Ideas">Home Decor Ideas</option>
+<option value="Glow Up & Lifestyle Tips">Glow Up & Lifestyle Tips</option>
+<option value="Small Bedroom Ideas">Small Bedroom Ideas</option>
+</select>
+
+<label>Short Description</label>
+<textarea id="post-description" rows="3" placeholder="Short summary for cards & previews..." required></textarea>
+
+<label>Cover Image (Thumbnail)</label>
+<input type="file" id="post-cover-file" accept="image/*">
+<input type="text" id="post-cover" placeholder="Or paste image URL">
+<img id="cover-preview" class="cover-preview" style="display:none;">
+
+<label>Content</label>
+<p style="font-size:13px;color:#777;margin:0 0 10px;">
+  Use the toolbar to add images between paragraphs, headings, links, and formatting.
+</p>
+
+<div class="editor-toolbar">
+  <button type="button" data-cmd="bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+  <button type="button" data-cmd="italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+  <button type="button" data-cmd="underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
+  <button type="button" data-cmd="formatBlock" data-value="h2" title="Heading"><i class="fa-solid fa-heading"></i></button>
+  <button type="button" data-cmd="formatBlock" data-value="p" title="Paragraph"><i class="fa-solid fa-paragraph"></i></button>
+  <button type="button" data-cmd="insertUnorderedList" title="Bullet list"><i class="fa-solid fa-list-ul"></i></button>
+  <button type="button" data-cmd="insertOrderedList" title="Numbered list"><i class="fa-solid fa-list-ol"></i></button>
+  <button type="button" id="btn-link" title="Insert link"><i class="fa-solid fa-link"></i></button>
+  <button type="button" id="btn-image" title="Insert image"><i class="fa-solid fa-image"></i></button>
+  <button type="button" data-cmd="removeFormat" title="Clear formatting"><i class="fa-solid fa-eraser"></i></button>
+</div>
+
+<div id="post-content" class="rich-editor" contenteditable="true">
+<p>Start writing your story here...</p>
+</div>
+
+<label style="margin-top:20px;">
+<input type="checkbox" id="post-featured"> Featured Post ⭐
+</label>
+
+<div class="form-actions">
+<button type="submit" id="save-btn">Publish Post</button>
+<a href="dashboard.html" class="cancel-btn">Cancel</a>
+</div>
+
+<p id="editor-status"></p>
+
+</form>
+</main>
+
+</div>
+
+<!-- Hidden inputs for image & link -->
+<input type="file" id="hidden-image-input" accept="image/*" style="display:none;">
+
+<script type="module" src="../js/editor.js"></script>
+</body>
+</html>

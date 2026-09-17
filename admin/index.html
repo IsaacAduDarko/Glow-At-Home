@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+Glow At Home Admin
+</title>
+
+
+<link rel="stylesheet" href="../css/admin.css">
+
+
+</head>
+
+
+<body>
+
+
+
+<div class="admin-loading">
+
+
+<h1>
+Glow At Home
+</h1>
+
+
+<p>
+Checking authentication...
+</p>
+
+
+</div>
+
+
+
+
+
+<script type="module">
+
+
+import {auth} from "../js/firebase.js";
+
+
+import {
+onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(user){
+
+
+window.location.href="dashboard.html";
+
+
+}
+else{
+
+
+window.location.href="login.html";
+
+
+}
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
