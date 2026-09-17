@@ -4,22 +4,16 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 let allPosts = [];
 
-function stripHTML(html) {
-  const d = document.createElement("div");
-  d.innerHTML = html;
-  return d.textContent || "";
-}
-
 function postCard(p) {
   return `
     <article class="post-card">
       <a href="post.html?id=${p.id}" class="post-card-link">
         <div class="post-thumb">
-          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <img src="${p.image || ''}" alt="${p.title || ''}" loading="lazy">
           <span class="post-cat-badge">${p.category || ""}</span>
         </div>
         <div class="post-card-body">
-          <h3>${p.title}</h3>
+          <h3>${p.title || "Untitled"}</h3>
           <p>${p.description || ""}</p>
           <span class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></span>
         </div>
@@ -38,11 +32,29 @@ function render(id, list) {
 
 onValue(ref(db, "posts"), (snapshot) => {
   allPosts = [];
-  snapshot.forEach(c => allPosts.push({ id: c.key, ...c.val() }));
+
+  // ✅ iterate each post properly
+  snapshot.forEach((child) => {
+    const val = child.val();
+    // Skip if malformed
+    if (!val || typeof val !== "object") return;
+
+    allPosts.push({
+      id: child.key,
+      ...val
+    });
+  });
+
+  // ✅ DEBUG — open browser console to verify all posts are loading
+  console.log("🔥 Total posts loaded:", allPosts.length);
+  console.log("🔥 Posts:", allPosts);
+
+  // Sort newest first
   allPosts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-  render("featured-posts", allPosts.filter(p => p.featured).slice(0, 3));
-  render("recent-posts", allPosts.slice(0, 6));
+  // Render sections
+  render("featured-posts", allPosts.filter(p => p.featured).slice(0, 6));
+  render("recent-posts", allPosts.slice(0, 9));
   render("decor-posts", allPosts.filter(p => p.category === "Home Decor Ideas").slice(0, 3));
   render("selfcare-posts", allPosts.filter(p => p.category === "Self-Care").slice(0, 3));
   render("lifestyle-posts", allPosts.filter(p => p.category === "Glow Up & Lifestyle Tips").slice(0, 3));
@@ -53,7 +65,6 @@ const searchDrawer = document.querySelector(".search-drawer");
 const searchInput = searchDrawer?.querySelector("input");
 const searchBtn = searchDrawer?.querySelector(".search-box button");
 
-// Add live results container
 if (searchDrawer) {
   const box = searchDrawer.querySelector(".search-box");
   const results = document.createElement("div");
@@ -67,13 +78,10 @@ function runSearch() {
   const results = document.getElementById("search-results");
   if (!results) return;
 
-  if (!q) {
-    results.innerHTML = "";
-    return;
-  }
+  if (!q) { results.innerHTML = ""; return; }
 
   const matches = allPosts.filter(p =>
-    p.title.toLowerCase().includes(q) ||
+    (p.title || "").toLowerCase().includes(q) ||
     (p.description || "").toLowerCase().includes(q) ||
     (p.category || "").toLowerCase().includes(q)
   );
@@ -97,10 +105,7 @@ function runSearch() {
 if (searchInput) {
   searchInput.addEventListener("input", runSearch);
   searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      runSearch();
-    }
+    if (e.key === "Enter") { e.preventDefault(); runSearch(); }
   });
 }
 if (searchBtn) {
